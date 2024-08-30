@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download Page</title>
+  <style>
+    /* CSS Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f1f1f1;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px;
+    }
+
+    .download-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      text-align: center;
+    }
+
+    .download-card h1 {
+      margin-top: 0;
+    }
+
+    .download-card p {
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .download-button {
+      display: inline-block;
+      background-color: #007bff;
+      color: #fff;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    .download-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="download-card">
+      <h1>Download Our Latest App</h1>
+      <p>Get the latest version of our mobile app and enjoy all the new features and improvements.</p>
+      <a href="#" class="download-button" id="download-link">Download Now</a>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript code
+    const downloadLink = document.getElementById('download-link');
+
+    downloadLink.addEventListener('click', (event) => {
+      event.preventDefault(); // Prevent the default link behavior
+      
+      // Simulate a file download
+      const downloadUrl = 'https://example.com/app.zip'; // Replace with the actual download URL
+      window.location.href = downloadUrl;
+    });
+  </script>
+</body>
+</html>

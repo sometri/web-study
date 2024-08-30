@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Download Page</title>
+  <style>
+    /* CSS Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f1f1f1;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px;
+    }
+
+    .download-card {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+    }
+
+    .download-card h1 {
+      margin-top: 0;
+    }
+
+    .download-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .download-list li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .download-list li:last-child {
+      margin-bottom: 0;
+    }
+
+    .download-icon {
+      margin-right: 16px;
+      color: #007bff;
+    }
+
+    .download-link {
+      color: #007bff;
+      text-decoration: none;
+      font-size: 16px;
+      transition: color 0.3s ease;
+    }
+
+    .download-link:hover {
+      color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="download-card">
+      <h1>Download Our Files</h1>
+      <ul class="download-list">
+        <li>
+          <i class="download-icon">📁</i>
+          <a href="#" class="download-link" data-url="https://example.com/file1.zip">File 1</a>
+        </li>
+        <li>
+          <i class="download-icon">📁</i>
+          <a href="#" class="download-link" data-url="https://example.com/file2.zip">File 2</a>
+        </li>
+        <li>
+          <i class="download-icon">📁</i>
+          <a href="#" class="download-link" data-url="https://example.com/file3.zip">File 3</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript code
+    const downloadLinks = document.querySelectorAll('.download-link');
+
+    downloadLinks.forEach((link) => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault(); // Prevent the default link behavior
+        
+        // Simulate a file download
+        const downloadUrl = event.target.dataset.url;
+        window.location.href = downloadUrl;
+      });
+    });
+  </script>
+</body>
+</html>

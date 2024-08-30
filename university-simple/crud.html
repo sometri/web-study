@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Management</title>
+  <style>
+    /* CSS Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+      padding: 40px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-top: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .actions button {
+      background-color: #333;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .actions button:hover {
+      background-color: #555;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .pagination button {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      color: #333;
+      padding: 8px 16px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .pagination button.active {
+      background-color: #333;
+      color: #fff;
+    }
+
+    .pagination button:hover:not(.active) {
+      background-color: #f4f4f4;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px;
+      }
+
+      .actions button, .pagination button {
+        padding: 6px 12px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Student Management</h1>
+    <div class="actions">
+      <button id="addStudent">Add Student</button>
+      <div class="search">
+        <input type="text" id="searchInput" placeholder="Search students...">
+        <button id="searchButton">Search</button>
+      </div>
+    </div>
+    <table id="studentTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Grade</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Student data will be dynamically added here -->
+      </tbody>
+    </table>
+    <div class="pagination">
+      <button id="prevPage">&lt;</button>
+      <button id="page1" class="active">1</button>
+      <button id="page2">2</button>
+      <button id="page3">3</button>
+      <button id="page4">4</button>
+      <button id="page5">5</button>
+      <button id="nextPage">&gt;</button>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript code
+    const studentData = [
+      { id: 1, name: 'John Doe', email: 'john.doe@example.com', grade: 'A' },
+      { id: 2, name: 'Jane Smith', email: 'jane.smith@example.com', grade: 'B' },
+      { id: 3, name: 'Bob Johnson', email: 'bob.johnson@example.com', grade: 'C' },
+      // Add more student data as needed
+    ];
+
+    const tableBody = document.getElementById('studentTable').getElementsByTagName('tbody')[0];
+    const prevPageBtn = document.getElementById('prevPage');
+    const nextPageBtn = document.getElementById('nextPage');
+    const pageButtons = document.querySelectorAll('.pagination button:not(#prevPage, #nextPage)');
+    let currentPage = 1;
+    let itemsPerPage = 5;
+
+    function renderStudents(start, end) {
+      tableBody.innerHTML = '';
+      for (let i = start; i < end; i++) {
+        const student = studentData[i];
+        if (student) {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${student.name}</td>
+            <td>${student.email}</td>
+            <td>${student.grade}</td>
+            <td>
+              <button class="editStudent">Edit</button>
+              <button class="deleteStudent">Delete</button>
+            </td>
+          `;
+          tableBody.appendChild(row);
+        }
+      }
+    }
+
+    function updatePagination() {
+      pageButtons.forEach((btn, index) => {
+        btn.classList.remove('active');
+        if (index === currentPage - 1) {
+          btn.classList.add('active');
+        }
+      });
+
+      const start = (currentPage - 1) * itemsPerPage;
+      const end = start + itemsPerPage;
+      renderStudents(start, end);
+    }
+
+    pageButtons.forEach((btn, index) => {
+      btn.addEventListener('click', () => {
+        currentPage = index + 1;
+        updatePagination();
+      });
+    });
+
+    prevPageBtn.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        updatePagination();
+      }
+    });
+
+    nextPageBtn.addEventListener('click', () => {
+      if (currentPage < pageButtons.length) {
+        currentPage++;
+        updatePagination();
+      }
+    });
+
+    document.getElementById('addStudent').addEventListener('click', () => {
+      // Add logic to create a new student
+    });
+
+    document.getElementById('searchButton').addEventListener('click', () => {
+      const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+      const filteredData = studentData.filter(student =>
+        student.name.toLowerCase().includes(searchTerm) ||
+        student.email.toLowerCase().includes(searchTerm)
+      );
+      currentPage = 1;
+      renderStudents(0, filteredData.length);
+    });
+
+    // Initial render of students
+    updatePagination();
+  </script>
+</body>
+</html>

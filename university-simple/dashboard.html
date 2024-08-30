@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - University Website</title>
+  <link rel="stylesheet" href="styles.css"> <!-- Link to the shared CSS file -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <h1>University Website</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="academics.html">Academics</a>
+      <a href="admissions.html">Admissions</a>
+      <a href="campus-life.html">Campus Life</a>
+      <a href="contact.html">Contact</a>
+      <a href="dashboard.html">Dashboard</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Dashboard</h2>
+
+    <div class="dashboard-container">
+      <div class="graph-container">
+        <canvas id="enrollment-chart"></canvas>
+      </div>
+      <div class="piechart-container">
+        <canvas id="department-chart"></canvas>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2024 University Website. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Enrollment Chart
+    var ctx = document.getElementById('enrollment-chart').getContext('2d');
+    var enrollmentChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['2019', '2020', '2021', '2022', '2023'],
+        datasets: [{
+          label: 'Enrollment',
+          data: [5000, 5200, 5500, 5800, 6000],
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    // Department Pie Chart
+    var ctx2 = document.getElementById('department-chart').getContext('2d');
+    var departmentChart = new Chart(ctx2, {
+      type: 'pie',
+      data: {
+        labels: ['Engineering', 'Business', 'Sciences', 'Humanities', 'Arts'],
+        datasets: [{
+          label: 'Department Enrollment',
+          data: [2500, 1800, 1200, 900, 600],
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+  </script>
+</body>
+</html>

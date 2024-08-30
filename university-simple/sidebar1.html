@@ -1,0 +1,32 @@
+<!-- In the sidebar.html file -->
+<div class="sidebar">
+    <i class="sidebar-toggle">&#9776;</i>
+    <ul class="sidebar-menu">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+  
+  <!-- In each page's HTML file -->
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Title</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Include the CSS file -->
+  </head>
+  <body>
+    <!-- Include the sidebar.html file -->
+    <%- include('sidebar.html') %>
+  
+    <div class="content">
+      <h1>Welcome to the Website</h1>
+      <p>This is the main content area of the page.</p>
+    </div>
+  
+    <script src="script.js"></script> <!-- Include the JavaScript file -->
+  </body>
+  </html>

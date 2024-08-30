@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Sidebar</title>
+  <style>
+    /* CSS Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: 100%;
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      box-sizing: border-box;
+      transition: left 0.3s ease;
+    }
+
+    .sidebar-toggle {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      font-size: 24px;
+      color: #333;
+      cursor: pointer;
+    }
+
+    .sidebar-menu {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .sidebar-menu li {
+      margin-bottom: 10px;
+    }
+
+    .sidebar-menu a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      padding: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .sidebar-menu a:hover {
+      background-color: #444;
+    }
+
+    .content {
+      margin-left: 220px;
+      padding: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        left: -200px;
+      }
+
+      .sidebar.show {
+        left: 0;
+      }
+
+      .content {
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <i class="sidebar-toggle">&#9776;</i>
+    <ul class="sidebar-menu">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+
+  <div class="content">
+    <h1>Welcome to the Website</h1>
+    <p>This is the main content area of the page.</p>
+  </div>
+
+  <script>
+    // JavaScript code
+    const sidebarToggle = document.querySelector('.sidebar-toggle');
+    const sidebar = document.querySelector('.sidebar');
+
+    sidebarToggle.addEventListener('click', () => {
+      sidebar.classList.toggle('show');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>University - Academic Subjects</title>
+  <style>
+    /* Basic styling */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .faculty-section {
+      margin-bottom: 40px;
+    }
+    .faculty-section h2 {
+      margin-top: 0;
+    }
+    .subject-list {
+      list-style-type: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-gap: 20px;
+    }
+    .subject-list li {
+      background-color: #f5f5f5;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Academic Subjects</h1>
+
+    <div class="faculty-section">
+      <h2>Faculty of Arts and Sciences</h2>
+      <ul class="subject-list">
+        <li>Biology</li>
+        <li>Chemistry</li>
+        <li>English Literature</li>
+        <li>History</li>
+        <li>Mathematics</li>
+        <li>Physics</li>
+      </ul>
+    </div>
+
+    <div class="faculty-section">
+      <h2>Faculty of Business</h2>
+      <ul class="subject-list">
+        <li>Accounting</li>
+        <li>Economics</li>
+        <li>Finance</li>
+        <li>Management</li>
+        <li>Marketing</li>
+        <li>Entrepreneurship</li>
+      </ul>
+    </div>
+
+    <div class="faculty-section">
+      <h2>Faculty of Engineering</h2>
+      <ul class="subject-list">
+        <li>Aerospace Engineering</li>
+        <li>Civil Engineering</li>
+        <li>Computer Science</li>
+        <li>Electrical Engineering</li>
+        <li>Mechanical Engineering</li>
+        <li>Software Engineering</li>
+      </ul>
+    </div>
+
+    <!-- Add more faculty sections as needed -->
+
+  </div>
+</body>
+</html>

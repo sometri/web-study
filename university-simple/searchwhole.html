@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Website</title>
+  <style>
+    /* CSS styles omitted for brevity */
+    .search-bar {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .search-bar input {
+      padding: 8px 12px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .search-bar button {
+      padding: 8px 16px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      margin-left: 8px;
+      cursor: pointer;
+    }
+    .search-results {
+      margin-top: 20px;
+      padding: 0 20px;
+    }
+    .search-results h2 {
+      margin-bottom: 10px;
+    }
+    .search-results-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    .search-results-list li {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search the website...">
+      <button id="searchButton">Search</button>
+    </div>
+
+    <div class="search-results" id="searchResults">
+      <h2>Search Results</h2>
+      <ul class="search-results-list"></ul>
+    </div>
+
+    <!-- Page content goes here -->
+  </main>
+
+  <footer>
+    <!-- Footer content goes here -->
+  </footer>
+
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.getElementById('searchButton');
+    const searchResultsList = document.querySelector('.search-results-list');
+    const searchResults = document.getElementById('searchResults');
+
+    // Replace this with your actual website content
+    const webpageContent = [
+      { title: 'Home', content: 'This is the home page.' },
+      { title: 'About', content: 'This is the about page.' },
+      { title: 'Services', content: 'This is the services page.' },
+      { title: 'Contact', content: 'This is the contact page.' },
+    ];
+
+    function performSearch() {
+      const searchTerm = searchInput.value.toLowerCase();
+      const matchingPages = webpageContent.filter(page =>
+        page.title.toLowerCase().includes(searchTerm) ||
+        page.content.toLowerCase().includes(searchTerm)
+      );
+
+      searchResultsList.innerHTML = '';
+      searchResults.style.display = matchingPages.length > 0 ? 'block' : 'none';
+
+      matchingPages.forEach(page => {
+        const listItem = document.createElement('li');
+        const link = document.createElement('a');
+        link.href = '#';
+        link.textContent = page.title;
+        listItem.appendChild(link);
+        searchResultsList.appendChild(listItem);
+      });
+    }
+
+    searchButton.addEventListener('click', performSearch);
+    searchInput.addEventListener('keyup', (event) => {
+      if (event.key === 'Enter') {
+        performSearch();
+      }
+    });
+  </script>
+</body>
+</html>

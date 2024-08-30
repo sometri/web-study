@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery</title>
+  <style>
+    /* CSS Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f1f1f1;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 20px;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    .gallery-overlay h3 {
+      color: #fff;
+      font-size: 24px;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Gallery</h1>
+    <div class="gallery-grid" id="gallery-container">
+      <!-- Gallery items will be dynamically generated here -->
+    </div>
+  </div>
+
+  <script>
+    // JavaScript code
+    const galleryData = [
+      {
+        image: 'https://via.placeholder.com/600x400',
+        title: 'Image 1'
+      },
+      {
+        image: 'https://via.placeholder.com/600x400',
+        title: 'Image 2'
+      },
+      {
+        image: 'https://via.placeholder.com/600x400',
+        title: 'Image 3'
+      },
+      {
+        image: 'https://via.placeholder.com/600x400',
+        title: 'Image 4'
+      },
+      {
+        image: 'https://via.placeholder.com/600x400',
+        title: 'Image 5'
+      },
+      {
+        image: 'https://via.placeholder.com/600x400',
+        title: 'Image 6'
+      }
+    ];
+
+    const galleryContainer = document.getElementById('gallery-container');
+
+    galleryData.forEach((item) => {
+      const galleryItem = document.createElement('div');
+      galleryItem.classList.add('gallery-item');
+
+      const img = document.createElement('img');
+      img.src = item.image;
+      img.alt = item.title;
+
+      const overlay = document.createElement('div');
+      overlay.classList.add('gallery-overlay');
+
+      const title = document.createElement('h3');
+      title.textContent = item.title;
+
+      overlay.appendChild(title);
+      galleryItem.appendChild(img);
+      galleryItem.appendChild(overlay);
+
+      galleryContainer.appendChild(galleryItem);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Management</title>
+  <!-- CSS styles omitted for brevity -->
+</head>
+<body>
+  <div class="container">
+    <h1>Student Management</h1>
+    <div class="actions">
+      <button id="addStudent">Add Student</button>
+      <div class="search">
+        <input type="text" id="searchInput" placeholder="Search students...">
+        <button id="searchButton">Search</button>
+      </div>
+    </div>
+    <table id="studentTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Grade</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Student data will be dynamically added here -->
+      </tbody>
+    </table>
+    <div class="pagination">
+      <button id="prevPage">&lt;</button>
+      <button id="page1" class="active">1</button>
+      <button id="page2">2</button>
+      <button id="page3">3</button>
+      <button id="page4">4</button>
+      <button id="page5">5</button>
+      <button id="nextPage">&gt;</button>
+    </div>
+  </div>
+
+  <!-- Modal for Edit and Delete -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <h2 id="modalTitle"></h2>
+      <form id="studentForm">
+        <div>
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+          <label for="grade">Grade:</label>
+          <input type="text" id="grade" name="grade" required>
+        </div>
+        <div class="actions">
+          <button type="submit" id="saveButton">Save</button>
+          <button type="button" id="deleteButton">Delete</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript code
+    const studentData = [
+      { id: 1, name: 'John Doe', email: 'john.doe@example.com', grade: 'A' },
+      { id: 2, name: 'Jane Smith', email: 'jane.smith@example.com', grade: 'B' },
+      { id: 3, name: 'Bob Johnson', email: 'bob.johnson@example.com', grade: 'C' },
+      // Add more student data as needed
+    ];
+
+    const tableBody = document.getElementById('studentTable').getElementsByTagName('tbody')[0];
+    const prevPageBtn = document.getElementById('prevPage');
+    const nextPageBtn = document.getElementById('nextPage');
+    const pageButtons = document.querySelectorAll('.pagination button:not(#prevPage, #nextPage)');
+    let currentPage = 1;
+    let itemsPerPage = 5;
+    let editingStudentId = null;
+
+    // ... (existing code for rendering and pagination)
+
+    function showModal(student, isEditing = false) {
+      const modal = document.getElementById('modal');
+      const closeButton = document.querySelector('.close-button');
+      const nameInput = document.getElementById('name');
+      const emailInput = document.getElementById('email');
+      const gradeInput = document.getElementById('grade');
+      const saveButton = document.getElementById('saveButton');
+      const deleteButton = document.getElementById('deleteButton');
+
+      if (isEditing) {
+        document.getElementById('modalTitle').textContent = 'Edit Student';
+        nameInput.value = student.name;
+        emailInput.value = student.email;
+        gradeInput.value = student.grade;
+        editingStudentId = student.id;
+        deleteButton.style.display = 'inline-block';
+      } else {
+        document.getElementById('modalTitle').textContent = 'Add Student';
+        nameInput.value = '';
+        emailInput.value = '';
+        gradeInput.value = '';
+        editingStudentId = null;
+        deleteButton.style.display = 'none';
+      }
+
+      modal.style.display = 'block';
+
+      closeButton.addEventListener('click', () => {
+        modal.style.display = 'none';
+      });
+
+      window.addEventListener('click', (event) => {
+        if (event.target == modal) {
+          modal.style.display = 'none';
+        }
+      });
+
+      document.getElementById('studentForm').addEventListener('submit', (event) => {
+        event.preventDefault();
+        saveStudent();
+        modal.style.display = 'none';
+        updatePagination();
+      });
+
+      deleteButton.addEventListener('click', () => {
+        deleteStudent();
+        modal.style.display = 'none';
+        updatePagination();
+      });
+    }
+
+    function saveStudent() {
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const grade = document.getElementById('grade').value;
+
+      if (editingStudentId !== null) {
+        // Update existing student
+        const student = studentData.find(s => s.id === editingStudentId);
+        student.name = name;
+        student.email = email;
+        student.grade = grade;
+      } else {
+        // Create a new student
+        const newStudent = { id: studentData.length + 1, name, email, grade };
+        studentData.push(newStudent);
+      }
+    }
+
+    function deleteStudent() {
+      if (editingStudentId !== null) {
+        const index = studentData.findIndex(s => s.id === editingStudentId);
+        if (index !== -1) {
+          studentData.splice(index, 1);
+        }
+      }
+    }
+
+    // ... (existing code for pagination and search)
+
+    document.querySelectorAll('.editStudent').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const row = btn.closest('tr');
+        const student = {
+          id: parseInt(row.dataset.id),
+          name: row.cells[0].textContent,
+          email: row.cells[1].textContent,
+          grade: row.cells[2].textContent
+        };
+        showModal(student, true);
+      });
+    });
+
+    document.querySelectorAll('.deleteStudent').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const row = btn.closest('tr');
+        const student = {
+          id: parseInt(row.dataset.id),
+          name: row.cells[0].textContent,
+          email: row.cells[1].textContent,
+          grade: row.cells[2].textContent
+        };
+        showModal(student, true);
+      });
+    });
+
+    document.getElementById('addStudent').addEventListener('click', () => {
+      showModal({}, false);
+    });
+
+    // ... (existing code for search)
+
+    // Initial render of students
+    updatePagination();
+  </script>
+</body>
+</html>

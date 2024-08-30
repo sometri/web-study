@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page with Pagination</title>
+  <style>
+    /* CSS Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #f4f4f4;
+    }
+
+    .content {
+      max-width: 800px;
+      padding: 40px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      margin-top: 40px;
+    }
+
+    .content h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .content p {
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+    }
+
+    .pagination button {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      color: #333;
+      padding: 8px 16px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .pagination button.active {
+      background-color: #333;
+      color: #fff;
+    }
+
+    .pagination button:hover:not(.active) {
+      background-color: #f4f4f4;
+    }
+
+    @media (max-width: 768px) {
+      .content {
+        padding: 20px;
+      }
+
+      .pagination button {
+        padding: 6px 12px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <h1>Welcome to the Page</h1>
+    <p>This is the main content area of the page. It can contain any type of content, such as text, images, or interactive elements.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed id nulla ac urna tincidunt iaculis. Nullam at ante vel eros tincidunt bibendum. Quisque finibus augue non metus bibendum, nec lacinia arcu consequat. Donec varius finibus magna, vel accumsan odio ultrices vel. Nulla facilisi. Aliquam erat volutpat. Praesent vel feugiat magna. Morbi lobortis magna in tortor pulvinar, a posuere pede faucibus.</p>
+    <p>Suspendisse dictum, augue non tincidunt laoreet, nisi magna efficitur mi, id efficitur eros libero vel magna. Sed posuere, ipsum vel aliquam tincidunt, massa nisl viverra nulla, vel malesuada magna mi vel quam. Morbi lobortis magna in tortor pulvinar, a posuere pede faucibus.</p>
+  </div>
+
+  <div class="pagination">
+    <button id="prevPage">&lt;</button>
+    <button id="page1" class="active">1</button>
+    <button id="page2">2</button>
+    <button id="page3">3</button>
+    <button id="page4">4</button>
+    <button id="page5">5</button>
+    <button id="nextPage">&gt;</button>
+  </div>
+
+  <script>
+    // JavaScript code
+    const prevPageBtn = document.getElementById('prevPage');
+    const nextPageBtn = document.getElementById('nextPage');
+    const pageButtons = document.querySelectorAll('.pagination button:not(#prevPage, #nextPage)');
+    let currentPage = 1;
+
+    function updatePagination() {
+      pageButtons.forEach((btn, index) => {
+        btn.classList.remove('active');
+        if (index === currentPage - 1) {
+          btn.classList.add('active');
+        }
+      });
+    }
+
+    pageButtons.forEach((btn, index) => {
+      btn.addEventListener('click', () => {
+        currentPage = index + 1;
+        updatePagination();
+      });
+    });
+
+    prevPageBtn.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        updatePagination();
+      }
+    });
+
+    nextPageBtn.addEventListener('click', () => {
+      if (currentPage < pageButtons.length) {
+        currentPage++;
+        updatePagination();
+      }
+    });
+  </script>
+</body>
+</html>

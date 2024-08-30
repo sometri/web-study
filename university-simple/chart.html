@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>University Building Layout Chart</title>
+  <style>
+    /* CSS Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f1f1f1;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px;
+    }
+
+    .chart {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-gap: 20px;
+    }
+
+    .floor {
+      display: grid;
+      grid-template-rows: repeat(10, 1fr);
+      grid-gap: 10px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .room {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      border-radius: 5px;
+    }
+
+    .room p {
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .chart {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>University Building Layout Chart</h1>
+    <div class="chart" id="chart-container"></div>
+  </div>
+
+  <script>
+    // JavaScript code
+    const buildingCount = 5;
+    const floorCount = 10;
+    const roomCount = 8;
+
+    const chartContainer = document.getElementById('chart-container');
+
+    for (let i = 1; i <= buildingCount; i++) {
+      const building = document.createElement('div');
+      building.classList.add('floor');
+
+      for (let j = 1; j <= floorCount; j++) {
+        const floor = document.createElement('div');
+        floor.classList.add('room');
+        floor.innerHTML = `<p>Building ${i}, Floor ${j}</p>`;
+        building.appendChild(floor);
+      }
+
+      chartContainer.appendChild(building);
+    }
+  </script>
+</body>
+</html>

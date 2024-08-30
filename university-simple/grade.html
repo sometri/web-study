@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Pass and Fail</title>
+  <style>
+    /* Basic styling */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .section {
+      margin-bottom: 40px;
+    }
+    .section h2 {
+      margin-top: 0;
+    }
+    .student-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .student-info img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-right: 20px;
+    }
+    .student-details h3 {
+      margin: 0 0 5px;
+    }
+    .student-details p {
+      margin: 0;
+      color: #666;
+    }
+    .course-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    .course-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .course-list li:last-child {
+      border-bottom: none;
+    }
+    .course-list .course-name {
+      font-weight: bold;
+    }
+    .course-list .course-grade {
+      font-weight: bold;
+    }
+    .pass {
+      color: green;
+    }
+    .fail {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Student Pass and Fail</h1>
+
+    <div class="section">
+      <div class="student-info">
+        <img src="student-avatar.jpg" alt="Student Avatar">
+        <div class="student-details">
+          <h3>John Doe</h3>
+          <p>ID: 12345678</p>
+        </div>
+      </div>
+      <h2>Courses</h2>
+      <ul class="course-list">
+        <li>
+          <span class="course-name">Introduction to Computer Science</span>
+          <span class="course-grade pass">A</span>
+        </li>
+        <li>
+          <span class="course-name">Calculus I</span>
+          <span class="course-grade pass">B+</span>
+        </li>
+        <li>
+          <span class="course-name">English Composition</span>
+          <span class="course-grade pass">B</span>
+        </li>
+        <li>
+          <span class="course-name">Physics I</span>
+          <span class="course-grade fail">D</span>
+        </li>
+        <li>
+          <span class="course-name">Introduction to Psychology</span>
+          <span class="course-grade pass">C+</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Add more sections for other students as needed -->
+
+  </div>
+</body>
+</html>

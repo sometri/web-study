@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events</title>
+  <style>
+    /* CSS Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f1f1f1;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px;
+    }
+
+    .event-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 30px;
+    }
+
+    .event-item {
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .event-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .event-content {
+      padding: 20px;
+    }
+
+    .event-content h3 {
+      margin-top: 0;
+    }
+
+    .event-content p {
+      margin-bottom: 10px;
+    }
+
+    .event-content .date {
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      .event-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .event-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Events</h1>
+    <div class="event-grid" id="event-container">
+      <!-- Event items will be dynamically generated here -->
+    </div>
+  </div>
+
+  <script>
+    // JavaScript code
+    const eventData = [
+      {
+        image: 'https://via.placeholder.com/300x200',
+        title: 'Event 1',
+        date: '2023-09-15',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+      },
+      {
+        image: 'https://via.placeholder.com/300x200',
+        title: 'Event 2',
+        date: '2023-10-20',
+        description: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+      },
+      {
+        image: 'https://via.placeholder.com/300x200',
+        title: 'Event 3',
+        date: '2023-11-05',
+        description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+      },
+      {
+        image: 'https://via.placeholder.com/300x200',
+        title: 'Event 4',
+        date: '2023-12-01',
+        description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.'
+      },
+      {
+        image: 'https://via.placeholder.com/300x200',
+        title: 'Event 5',
+        date: '2024-01-15',
+        description: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+      },
+      {
+        image: 'https://via.placeholder.com/300x200',
+        title: 'Event 6',
+        date: '2024-02-28',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+      }
+    ];
+
+    const eventContainer = document.getElementById('event-container');
+
+    eventData.forEach((event) => {
+      const eventItem = document.createElement('div');
+      eventItem.classList.add('event-item');
+
+      const img = document.createElement('img');
+      img.src = event.image;
+      img.alt = event.title;
+
+      const content = document.createElement('div');
+      content.classList.add('event-content');
+
+      const title = document.createElement('h3');
+      title.textContent = event.title;
+
+      const date = document.createElement('p');
+      date.classList.add('date');
+      date.textContent = event.date;
+
+      const description = document.createElement('p');
+      description.textContent = event.description;
+
+      content.appendChild(title);
+      content.appendChild(date);
+      content.appendChild(description);
+
+      eventItem.appendChild(img);
+      eventItem.appendChild(content);
+
+      eventContainer.appendChild(eventItem);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>University Building Layout</title>
+  <style>
+    /* CSS Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px;
+    }
+
+    .building {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .floor {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      grid-gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .room {
+      background-color: #f1f1f1;
+      padding: 10px;
+      text-align: center;
+      border-radius: 5px;
+    }
+
+    .room p {
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .building {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>University Building Layout</h1>
+    <div class="building" id="building-container"></div>
+  </div>
+
+  <script>
+    // JavaScript code
+    const buildingCount = 5;
+    const floorCount = 10;
+    const roomCount = 8;
+
+    const buildingContainer = document.getElementById('building-container');
+
+    for (let i = 1; i <= buildingCount; i++) {
+      const building = document.createElement('div');
+      building.classList.add('building');
+
+      for (let j = 1; j <= floorCount; j++) {
+        const floor = document.createElement('div');
+        floor.classList.add('floor');
+
+        for (let k = 1; k <= roomCount; k++) {
+          const room = document.createElement('div');
+          room.classList.add('room');
+          room.innerHTML = `<p>Building ${i}, Floor ${j}, Room ${k}</p>`;
+          floor.appendChild(room);
+        }
+
+        building.appendChild(floor);
+      }
+
+      buildingContainer.appendChild(building);
+    }
+  </script>
+</body>
+</html>

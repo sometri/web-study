@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>University Revenue and Expense</title>
+  <style>
+    /* Basic styling */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .section {
+      margin-bottom: 40px;
+    }
+    .section h2 {
+      margin-top: 0;
+    }
+    .revenue-expense-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .revenue-expense-table th, .revenue-expense-table td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    .revenue-expense-table th {
+      background-color: #007bff;
+      color: #fff;
+    }
+    .revenue-expense-table td.amount {
+      text-align: right;
+    }
+    .revenue-expense-table tfoot td {
+      font-weight: bold;
+    }
+    .chart-container {
+      width: 100%;
+      height: 400px;
+      position: relative;
+    }
+    .chart-container canvas {
+      width: 100% !important;
+      height: 100% !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>University Revenue and Expense</h1>
+
+    <div class="section">
+      <h2>Revenue</h2>
+      <table class="revenue-expense-table">
+        <thead>
+          <tr>
+            <th>Revenue Source</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tuition and Fees</td>
+            <td class="amount">$120,000,000</td>
+          </tr>
+          <tr>
+            <td>Research Grants</td>
+            <td class="amount">$50,000,000</td>
+          </tr>
+          <tr>
+            <td>Donations and Endowments</td>
+            <td class="amount">$30,000,000</td>
+          </tr>
+          <tr>
+            <td>Auxiliary Services</td>
+            <td class="amount">$25,000,000</td>
+          </tr>
+          <tr>
+            <td>Other Revenue</td>
+            <td class="amount">$10,000,000</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>Total Revenue</td>
+            <td class="amount">$235,000,000</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>Expenses</h2>
+      <table class="revenue-expense-table">
+        <thead>
+          <tr>
+            <th>Expense Category</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Salaries and Benefits</td>
+            <td class="amount">$130,000,000</td>
+          </tr>
+          <tr>
+            <td>Facilities and Operations</td>
+            <td class="amount">$45,000,000</td>
+          </tr>
+          <tr>
+            <td>Instruction and Academic Support</td>
+            <td class="amount">$40,000,000</td>
+          </tr>
+          <tr>
+            <td>Research and Sponsored Programs</td>
+            <td class="amount">$35,000,000</td>
+          </tr>
+          <tr>
+            <td>Student Services</td>
+            <td class="amount">$20,000,000</td>
+          </tr>
+          <tr>
+            <td>Other Expenses</td>
+            <td class="amount">$15,000,000</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>Total Expenses</td>
+            <td class="amount">$285,000,000</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>Revenue vs. Expense Breakdown</h2>
+      <div class="chart-container">
+        <canvas id="revenueExpenseChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Create the revenue vs. expense chart
+    const ctx = document.getElementById('revenueExpenseChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Revenue', 'Expense'],
+        datasets: [{
+          label: 'Amount',
+          data: [235000000, 285000000],
+          backgroundColor: ['#007bff', '#dc3545'],
+          borderColor: ['#007bff', '#dc3545'],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            callback: function(value, index, ticks) {
+              return '$' + value.toLocaleString();
+            }
+          }
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'University Revenue vs. Expense'
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
